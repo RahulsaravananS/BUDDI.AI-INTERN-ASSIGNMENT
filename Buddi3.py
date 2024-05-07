@@ -1,34 +1,24 @@
 import numpy as np
-a=[10,6,4]
-b=['Banana','Apple','Carrot']
-def pmf(a):
-        c=[]
-        d=sum(a)
-        for i in a:
-            c.append(i/d)
-        return c
-def cmf(e):
-        m=[]
-        for i in range(len(e)):
-            m.append(sum(e[0:i+1]))
-        return m
-def randomsampler(a,b):
-    e=pmf(a)
-    print("The pmf is",e)
-    f=cmf(e)
-    print("The cmf is",f)
-    print("Enter the number of sample you want")
-    n=int(input())
-    z=[]
+
+def drawSample(dict, n):
+    pmf=[]
+    cmf=[]
+    randomNums=[]
+    samples=[]
+    keys=list(dict.keys()) 
+    sum_keys=sum(dict.values())
+    for i in dict.values():
+        pmf.append(i/sum_keys)
+        cmf.append(sum(pmf))
     for i in range(n):
-        x=np.random.uniform(0,1)
-        for j in range(len(e)):
-            if f[j] > x:
-                z.append(j)
-                break
-    print("The generated random sample index is",z)
-    print("The generated random sample is",end=" ")
-    for i in z:
-        print(b[i],end=" ")
-    print()
-randomsampler(a,b)
+        randomNums.append(np.random.uniform(0,1))
+    for i in randomNums:
+        j = 0
+        while i > cmf[j]:
+            j += 1
+        samples.append(keys[j])
+    return samples
+        
+dict = {'Apple': 10, 'Banana': 6, 'Carrot': 4}
+n = 10
+print(drawSample(dict, n))
