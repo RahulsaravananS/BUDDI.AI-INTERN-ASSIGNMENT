@@ -12,10 +12,10 @@ MinEpsilon = 2 ** 30
 B1 = -1
 B2 = -1
 
-for i in range(-300,400,1):
-   i=i/100
-   for j in range(-300,400,1):
-      j=j/100
+for i in range(-3,4,1):
+   i=i
+   for j in range(-3,4,1):
+      j=j
       b1 = i
       b2 = j
       count = 0
