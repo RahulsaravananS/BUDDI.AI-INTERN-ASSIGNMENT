@@ -19,3 +19,7 @@ Estimated pi using Momnte claro Method(normal distribution)
 # Buddi2 smoothen.py
 
 Estimated pi using Momnte claro Method and smooothening the plot(uniform distribution)
+
+# Buddi3.py
+
+Random sample generator using Uniform Distribution
