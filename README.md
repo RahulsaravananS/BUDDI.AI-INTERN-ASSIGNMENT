@@ -23,3 +23,11 @@ Estimated pi using Momnte claro Method and smooothening the plot(uniform distrib
 # Buddi3.py
 
 Random sample generator using Uniform Distribution
+
+# Buddi4.py
+
+A graph represents a standard normal distribution curve with different mean and same standard deviation
+
+# Buddi4(2).py
+
+A graph represents a standard normal distribution curve with Same mean and Different standard deviation
