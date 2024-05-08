@@ -10,15 +10,15 @@ Estimation of epsilon for a quadratic polynomial for a real numbers
 
 # Buddi2 Uniform.py
 
-Estimated pi using Momnte claro Method(uniform distribution)
+Estimated pi using Monte claro Method(uniform distribution)
 
 # Buddi2 normal.py
 
-Estimated pi using Momnte claro Method(normal distribution)
+Estimated pi using Monte claro Method(normal distribution)
 
 # Buddi2 smoothen.py
 
-Estimated pi using Momnte claro Method and smooothening the plot(uniform distribution)
+Estimated pi using Monte claro Method and smooothening the plot(uniform distribution)
 
 # Buddi3.py
 
@@ -31,3 +31,11 @@ A graph represents a standard normal distribution curve with different mean and 
 # Buddi4(2).py
 
 A graph represents a standard normal distribution curve with Same mean and Different standard deviation
+
+# Buddi5.py
+
+A graph represents lagrange interpolation polynomial which covers all the known data points
+
+# Buddi5(2).py
+
+...
