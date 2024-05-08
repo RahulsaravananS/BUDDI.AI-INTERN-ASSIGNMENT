@@ -1,15 +1,14 @@
 import numpy as np
 
 def drawSample(dict, n):
-    pmf=[]
     cmf=[]
     randomNums=[]
     samples=[]
-    keys=list(dict.keys()) 
-    sum_keys=sum(dict.values())
+    keys=list(dict.keys())
+    s=0
     for i in dict.values():
-        pmf.append(i/sum_keys)
-        cmf.append(sum(pmf))
+        s+=i
+        cmf.append(s)
     for i in range(n):
         randomNums.append(np.random.uniform(0,1))
     for i in randomNums:
@@ -19,6 +18,6 @@ def drawSample(dict, n):
         samples.append(keys[j])
     return samples
         
-dict = {'Apple': 10, 'Banana': 6, 'Carrot': 4}
+dict = {'Apple': 0.5, 'Banana': 0.3, 'Carrot': 0.2}
 n = 10
 print(drawSample(dict, n))
