@@ -4,14 +4,17 @@ m = 0
 me=1
 mea=2
 sd = 1
-x = np.linspace(-5*sd, 5*sd)
-f = (1 / (sd * np.sqrt(2 * np.pi))) * np.exp(-0.5 * ((x - m) / sd) ** 2)
-fe= (1 / (sd * np.sqrt(2 * np.pi))) * np.exp(-0.5 * ((x - me) / sd) ** 2)
-fea = (1 / (sd * np.sqrt(2 * np.pi))) * np.exp(-0.5 * ((x - mea) / sd) ** 2)
+x1 = np.linspace(m-(5*sd), m+(5*sd))
+x2 = np.linspace(me-(5*sd), me+(5*sd))
+x3 = np.linspace(mea-(5*sd), mea+(5*sd))
 
-plt.plot(x, f, color='blue', label='mean 0 Bell Curve')
-plt.plot(x, fe, color='red', label='mean 1 Bell Curve')
-plt.plot(x, fea, color='black', label='mean 2 Bell Curve')
+f = (1 / (sd * np.sqrt(2 * np.pi))) * np.exp(-0.5 * ((x1 - m) / sd) ** 2)
+fe= (1 / (sd * np.sqrt(2 * np.pi))) * np.exp(-0.5 * ((x2 - me) / sd) ** 2)
+fea = (1 / (sd * np.sqrt(2 * np.pi))) * np.exp(-0.5 * ((x3 - mea) / sd) ** 2)
+
+plt.plot(x1, f, color='blue', label='mean 0 Bell Curve')
+plt.plot(x2, fe, color='red', label='mean 1 Bell Curve')
+plt.plot(x3, fea, color='black', label='mean 2 Bell Curve')
 
 plt.plot()
 plt.title("Normal Distribution ")
