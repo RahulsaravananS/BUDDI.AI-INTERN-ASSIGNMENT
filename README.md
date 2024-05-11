@@ -38,4 +38,9 @@ A graph represents lagrange interpolation polynomial which covers all the known 
 
 # Buddi5(2).py
 
-...
+Two graphs that shows the different models and their corresponding F(X) values and Bias-Variance Tradeoff between them
+
+
+# Buddi6.py
+
+A graph that represent the error convergence of linear regression model using gradient descent
