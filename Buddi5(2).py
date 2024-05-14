@@ -1,53 +1,60 @@
-# Importing necessary libraries
 import numpy as np
 import matplotlib.pyplot as plt
 import random
 
-# Generating x values
-x = [[1]*101, [], [], [], []]  # Initialize x with 101 ones and four empty lists for powers of x
-x1 = []  # List to store x values
-y = []   # List to store y values
+x=[[1]*101,[],[],[],[]]
+x1 =[]
+y=[]
+Y=[]
 
-# Generating x values from -5 to 5 in steps of 0.1 and corresponding y values
-for i in range(-50, 51):
-    i = i / 10  # Convert to float
-    x1.append(i)  # Append x value to x1 list
-    # Append powers of x to corresponding lists in x
-    for j in range(1, 5):
-        x[j].append(i ** j)
-    # Generate y values with noise
-    n = np.random.normal(0, 3)  # Generate random noise
-    fx = (2 * (i ** 4)) - (3 * (i ** 3)) + (7 * (i ** 2)) - (23 * i) + 8 + n  # Polynomial function
-    y.append(fx)  # Append y value to y list
-
-# Transpose x and y for matrix operations
-X = np.transpose(x)
-Y = np.transpose(y)
-
-# Calculate coefficients using normal equation for linear regression
-b = np.dot(np.linalg.inv(np.dot(np.transpose(X), X)), np.dot(np.transpose(X), y))
-
-# Predicting y values for different polynomial models
-y1 = []  # Linear model
-y2 = []  # Quadratic model
-y3 = []  # Cubic model
-y4 = []  # Biquadratic model
-for i in x1:
-    f1 = b[0] + b[1] * i
+# Append x values to the respective columns in x matrix
+# Generate x values from -5 to 5 with a step size of 0.1 and calculate y values
+for i in range(-50,51):
+    i=i/10
+    x1.append(i)
+    x[1].append(i)
+    x[2].append(i**2)
+    x[3].append(i**3)
+    x[4].append(i**4)
+    n=np.random.normal(0,3)
+    fx=((2*(i**4))-(3*(i**3))+(7*(i**2))-(23*i)+8+n)
+    Y.append(fx)
+x2=x1
+np.random.shuffle(x2)
+for i in x2:
+    n=np.random.normal(0,3)
+    fx=((2*(i**4))-(3*(i**3))+(7*(i**2))-(23*i)+8+n)
+    y.append(fx)
+# np.random.shuffle(x1)
+# Transpose the 'x' list to prepare it for matrix operations
+X=np.transpose(x)
+# Transpose the 'y' list to prepare it for matrix operations
+Y=np.transpose(y)
+# Calculate the coefficients 'b' using linear regression formula
+b=np.matmul(np.linalg.inv(np.matmul(np.transpose(X),X)),np.matmul(np.transpose(X),Y))
+y1=[]
+y2=[]
+y3=[]
+y4=[]
+for i in x2:
+    f1=b[0] + b[1]*i
     y1.append(f1)
-    f2 = b[0] + b[1] * i + b[2] * (i ** 2)
+    f2 = b[0] + b[1]*i + b[2] * (i**2)
     y2.append(f2)
-    f3 = b[0] + b[1] * i + b[2] * (i ** 2) + b[3] * (i ** 3)
+    f3= b[0] + b[1]*i + b[2] * (i**2)  + b[3]*(i**3)
     y3.append(f3)
-    f4 = b[0] + b[1] * i + b[2] * (i ** 2) + b[3] * (i ** 3) + b[4] * (i ** 4)
+    f4= b[0] + b[1]*i + b[2] * (i**2)  + b[3]*(i**3) + b[4]*(i**4)
     y4.append(f4)
 
-# Function for Lagrange Interpolation
+# print(len)
+# for i in x1:
+#     if i not in X1:
+#         X2.append(i)
 def lagrangeInterpolation(x, y, xInterp):
     n = len(x)
     m = len(xInterp)
     yInterp = np.zeros(m)
-
+    
     for j in range(m):
         p = 0
         for i in range(n):
@@ -58,65 +65,95 @@ def lagrangeInterpolation(x, y, xInterp):
             p += y[i] * L
         yInterp[j] = p
     return yInterp
-
-# Interpolating y values using Lagrange Interpolation
-yInte = lagrangeInterpolation(x1, y, x1)
-
-# Plotting the different models
+yInte=lagrangeInterpolation(x2,y,x2)
 plt.figure(figsize=(8, 4))
-plt.plot(x1, y1, label="Linear")
-plt.plot(x1, y2, label="Quadratic")
-plt.plot(x1, y3, label="Cubic")
-plt.plot(x1, y4, label="Biquadratic")
-plt.plot(x1, yInte, marker='^', label="Lagrange Interpolation")
+plt.plot(x2,y1,label="linear")
+plt.plot(x2,y2,label="quadratic")
+plt.plot(x2,y3,label="cubic")
+plt.plot(x2,y4,label="biquadratic")
+plt.plot(x2,yInte,marker='^',label="legrange")
 plt.xlabel('X')
-plt.ylabel('Y = F(X)')
-plt.title("Different Models and Their Plots")
-plt.figtext(0.5, 0.01, "This plot shows the different models and their corresponding F(X) values.", ha="center",
-            fontsize=10, bbox={"facecolor": "brown", "alpha": 0.5, "pad": 5})
+plt.ylabel('Y=F(X)')
+plt.title("Different models and its plot")
+plt.figtext(0.5, 0.01, "Let us consider a biquadratic polynomial and 101 x values in the range(-5,5) and generated y values for different models such as linear,quadratic,cubic and biquadratic and their corresponding f(x) is plotted above", ha="center", fontsize=10, bbox={"facecolor":"brown", "alpha":0.5, "pad":5})
 plt.legend()
-plt.show()
+#plt.show()
 
-# Performing Bias-Variance Tradeoff analysis
-X1 = random.sample(x1, 71)  # Randomly select 71 points for training
-X2 = [i for i in x1 if i not in X1]  # Remaining points for testing
+# x2=x1
+# np.random.shuffle(x2)
+X1=x1[:81]
+X2=x1[81:]
 
-# Predicting y values for training points
-y1_train = [b[0] + b[1] * i for i in X1]  # Linear model
-y2_train = [b[0] + b[1] * i + b[2] * (i ** 2) for i in X1]  # Quadratic model
-y3_train = [b[0] + b[1] * i + b[2] * (i ** 2) + b[3] * (i ** 3) for i in X1]  # Cubic model
-y4_train = [b[0] + b[1] * i + b[2] * (i ** 2) + b[3] * (i ** 3) + b[4] * (i ** 4) for i in X1]  # Biquadratic model
+y1_train=[]
+y2_train=[]
+y3_train=[]
+y4_train=[]
+for i in X1:
+    f1=b[0] + b[1]*i
+    y1_train.append(f1)
+    f2 = b[0] + b[1]*i + b[2] * (i**2)
+    y2_train.append(f2)
+    f3= b[0] + b[1]*i + b[2] * (i**2)  + b[3]*(i**3)
+    y3_train.append(f3)
+    f4= b[0] + b[1]*i + b[2] * (i**2)  + b[3]*(i**3) + b[4]*(i**4)
+    y4_train.append(f4)
+# print(y1_train)
+# print(y2_train)
+# print(y3_train)
+# print(y4_train)
+e1train=[]
+e2train=[]
+e3train=[]
+e4train=[]
+com=[1,2,3,4]
+for i in range(81):
+    e1train.append((y1_train[i]-y[i])**2)
+    e2train.append((y2_train[i]-y[i])**2)
+    e3train.append((y3_train[i]-y[i])**2)
+    e4train.append((y4_train[i]-y[i])**2)
+Etrain=[]
+Etrain.append(np.mean(e1train))
+Etrain.append(np.mean(e2train))
+Etrain.append(np.mean(e3train))
+Etrain.append(np.mean(e4train))
 
-# Calculating errors for training data
-e1_train = [abs(y1_train[i] - y[i]) for i in range(71)]
-e2_train = [abs(y2_train[i] - y[i]) for i in range(71)]
-e3_train = [abs(y3_train[i] - y[i]) for i in range(71)]
-e4_train = [abs(y4_train[i] - y[i]) for i in range(71)]
-Etrain = [sum(e1_train) / len(e1_train), sum(e2_train) / len(e2_train), sum(e3_train) / len(e3_train),
-          sum(e4_train) / len(e4_train)]
+ytest1=[]
+ytest2=[]
+ytest3=[]
+ytest4=[]
+Yorig=y[81:]
+e1test=[]
+e2test=[]
+e3test=[]
+e4test=[]
+Etest=[]
+for i in X2:
+    f1=b[0] + b[1]*i
+    ytest1.append(f1)
+    f2 = b[0] + b[1]*i + b[2] * (i**2)
+    ytest2.append(f2)
+    f3= b[0] + b[1]*i + b[2] * (i**2)  + b[3]*(i**3)
+    ytest3.append(f3)
+    f4= b[0] + b[1]*i + b[2] * (i**2)  + b[3]*(i**3) + b[4]*(i**4)
+    ytest4.append(f4)
+print(len(ytest1))
 
-# Predicting y values for testing points
-ytest1 = [b[0] + b[1] * i for i in X2]  # Linear model
-ytest2 = [b[0] + b[1] * i + b[2] * (i ** 2) for i in X2]  # Quadratic model
-ytest3 = [b[0] + b[1] * i + b[2] * (i ** 2) + b[3] * (i ** 3) for i in X2]  # Cubic model
-ytest4 = [b[0] + b[1] * i + b[2] * (i ** 2) + b[3] * (i ** 3) + b[4] * (i ** 4) for i in X2]  # Biquadratic model
-
-# Calculating errors for testing data
-e1_test = [abs(ytest1[i] - y[i + 71]) for i in range(len(X2))]
-e2_test = [abs(ytest2[i] - y[i + 71]) for i in range(len(X2))]
-e3_test = [abs(ytest3[i] - y[i + 71]) for i in range(len(X2))]
-e4_test = [abs(ytest4[i] - y[i + 71]) for i in range(len(X2))]
-Etest = [sum(e1_test) / len(e1_test), sum(e2_test) / len(e2_test), sum(e3_test) / len(e3_test),
-         sum(e4_test) / len(e4_test)]
-
-# Plotting Bias-Variance Tradeoff
+# fxt=((2*(i**4))-(3*(i**3))+(7*(i**2))-(23*i)+8+n)
+for i in range(len(ytest1)):
+    e1test.append((ytest1[i]-Yorig[i])**2)
+    e2test.append((ytest2[i]-Yorig[i])**2)
+    e3test.append((ytest3[i]-Yorig[i])**2)
+    e4test.append((ytest4[i]-Yorig[i])**2)
+Etest.append(np.mean(e1test))
+Etest.append(np.mean(e2test))
+Etest.append(np.mean(e3test))
+Etest.append(np.mean(e4test))
 plt.figure(figsize=(8, 4))
-plt.plot([1, 2, 3, 4], Etest, label="Variance")
-plt.plot([1, 2, 3, 4], Etrain, label="Bias")
+plt.plot(com,Etest,label="Variance")
+plt.plot(com,Etrain,label="Bias")
 plt.xlabel('Complexity')
 plt.ylabel('Error')
-plt.title("Bias-Variance Tradeoff")
-plt.figtext(0.5, 0.01, "This plot shows the Bias-Variance Tradeoff for different models.", ha="center", fontsize=10,
-            bbox={"facecolor": "brown", "alpha": 0.5, "pad": 5})
+plt.title("Bias Variance TradeOff")
+plt.figtext(0.5, 0.01, "The above graph shows the bias variance tradeoff for models such as linear,quadratic,cubic and biquadratic models", ha="center", fontsize=10, bbox={"facecolor":"brown", "alpha":0.5, "pad":5})
 plt.legend()
 plt.show()
