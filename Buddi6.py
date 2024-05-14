@@ -73,7 +73,7 @@ plt.title('Gradient Descent: Error Convergence')
 plt.figtext(0.5, 0.01, "The above graph represent the error convergence of linear regression model using gradient descent", ha="center", fontsize=10, bbox={"facecolor": "brown", "alpha": 0.5, "pad": 5})
 plt.legend()
 
-#plot the 3D graph
+#plot the 3D graph with epoch
 
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
@@ -84,4 +84,17 @@ ax.set_xlabel('Beta0(B0)')
 ax.set_ylabel('Beta1(B1')
 ax.set_zlabel('Epoch')
 ax.set_title('Surface Plot')
+
+# plot the 3D graph with error
+
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.plot_trisurf(B0,B1,error_list, cmap='viridis',label="Change of B0 and B1 with error",edgecolor='none')
+plt.figtext(0.5, 0.01, "The above 3D graph represent the change of B0 and B1 with respect to error ", ha="center", fontsize=10, bbox={"facecolor": "brown", "alpha": 0.5, "pad": 5})
+plt.legend()
+ax.set_xlabel('Beta0(B0)')
+ax.set_ylabel('Beta1(B1')
+ax.set_zlabel('Error')
+ax.set_title('Surface Plot')
+
 plt.show()
