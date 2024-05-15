@@ -9,46 +9,61 @@ y = 2*x - 3 + np.random.normal(0, 5)
 
 # Calculating polynomial coefficients using closed form
 deg = 1  # Degree of polynomial
+
 # Constructing the Vandermonde matrix for the given x values
 X_mat = np.vander(x, deg + 1, increasing=True)
-XT = np.transpose(X_mat)  # Transposing X_mat to facilitate matrix multiplication
-XTX = np.matmul(XT, X_mat)  # X_transpose times X
-XTY = np.matmul(XT, y)  # X_transpose times y
-coefficients = np.matmul(np.linalg.inv(XTX), XTY)  # Closed form solution
-b0_closed, b1_closed = coefficients  # Intercept and slope of the line
+# Transposing X_mat to facilitate matrix multiplication
+XT = np.transpose(X_mat)  
+# X_transpose times X
+XTX = np.matmul(XT, X_mat) 
+# X_transpose times X
+XTY = np.matmul(XT, y) 
+# Closed form solution
+coefficients = np.matmul(np.linalg.inv(XTX), XTY)  
+# Intercept and slope of the line
+b0_closed, b1_closed = coefficients  
 
 # Gradient Descent processing
 b0_init = np.random.normal(0, 1)  # Initial guess for intercept
 b1_init = np.random.normal(0, 1)  # Initial guess for slope
-
-error_init = np.mean((y - (b0_init + b1_init*x))**2)  # Initial error calculation
-lr = 0.01  # Learning rate
-
-error = error_init  # Current error
-b0 = b0_init  # Initial intercept
-b1 = b1_init  # Initial slope
-epoch = 0  # Initial epoch
-
-epoch_list = [0]  # List to store epochs
-error_list = [error_init]  # List to store errors
-
-converged = False  # Flag to check convergence
+# Initial error calculation
+error_init = np.mean((y - (b0_init + b1_init*x))**2)  
+# Learning rate
+lr = 0.01  
+# Current error
+error = error_init  
+# Initial intercept
+b0 = b0_init  
+# Initial slope
+b1 = b1_init  
+# Initial epoch
+epoch = 0  
+# List to store epochs
+epoch_list = [0]  
+# List to store errors
+error_list = [error_init]  
+# Flag to check convergence
+converged = False  
 B0=[]
 B1=[]
 # Gradient Descent loop
 while not converged:
-    y_pred = b0 + b1*x  # Predicted y values using current parameters
-    grad_b0 = -2*np.mean((y - y_pred))  # Gradient of intercept
-    grad_b1 = -2*np.mean((y - y_pred)*x)  # Gradient of slope
+    # Predicted y values using current parameters
+    y_pred = b0 + b1*x  
+    # Gradient of intercept
+    grad_b0 = -2*np.mean((y - y_pred))  
+    # Gradient of slope
+    grad_b1 = -2*np.mean((y - y_pred)*x)  
     # Updating parameters using gradients and learning rate
     b0 -= lr * grad_b0
     b1 -= lr * grad_b1
     # store the B0 and B1 values in list
     B0.append(b0)
     B1.append(b1)
-
-    new_error = np.mean((y - (b0 + b1*x))**2)  # New error calculation
-    epoch += 1  # Incrementing epoch
+    # New error calculation
+    new_error = np.mean((y - (b0 + b1*x))**2)  
+    # Incrementing epoch
+    epoch += 1  
     
     # Storing epoch and error values for visualization
     epoch_list.append(epoch)
@@ -56,9 +71,11 @@ while not converged:
     
     # Checking convergence criteria
     if abs(error - new_error) < 10e-6:
-        converged = True  # Convergence reached
+        # Convergence reached
+        converged = True  
     else:
-        error = new_error  # Update error for next iteration
+        # Update error for next iteration
+        error = new_error  
 
 # Printing results
 print("Closed Form: Beta0:", b0_closed, "Beta1:", b1_closed, "Error value:", error_init)
