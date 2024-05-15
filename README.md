@@ -55,3 +55,7 @@ A graph that represent the Mean Square Error of Training data and testing data o
 # Buddi6(4).py
 
 A graph that represent the Mean Squared Error of Training data and testing data is plotted with respect to the number of minibatch iterations executed
+
+# Buddi7.py
+
+A graph that represent the the decision boundary is perpendicular to the regression line which classify 2 classes
