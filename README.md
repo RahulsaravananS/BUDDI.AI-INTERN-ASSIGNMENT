@@ -43,3 +43,7 @@ Two graphs that shows the different models and their corresponding F(X) values a
 # Buddi6.py
 
 A graph that represent the error convergence of linear regression model using gradient descent
+
+# Buddi6(2).py
+
+A graph that represent the error convergence of training and testing dataset of linear regression model using gradient descent
