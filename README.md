@@ -47,3 +47,11 @@ A graph that represent the error convergence of linear regression model using gr
 # Buddi6(2).py
 
 A graph that represent the error convergence of training and testing dataset of linear regression model using gradient descent
+
+# Buddi6(3).py
+
+A graph that represent the Mean Square Error of Training data and testing data of stochastic gradient descent is plotted with respect to the number of Epoch cycles executed
+
+# Buddi6(4).py
+
+A graph that represent the Mean Squared Error of Training data and testing data is plotted with respect to the number of minibatch iterations executed
