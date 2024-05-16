@@ -33,6 +33,39 @@ def fit_linear_regression(a, Y):
     b1=betas[1]
     return b1, b0
 
+#Function to plot the threshold vs MCE
+def threshVsMce(X,slope,intercept):
+    left=[-3,-4,-5,-6]
+    right=[1,2,3,4,5]
+    thresh=[]
+    x=[]
+    mce=[]
+    for i in np.arange(min(X),max(X),0.1):
+        thresh.append(i)
+        x.append((i-intercept)/slope)
+    for i in x:
+        count=0
+        if i < 0:
+            for j in left:
+                if j>i:
+                    count+=1
+            mce.append(count)
+        else:
+            for j in right:
+                if j < i:
+                    count+=1
+            mce.append(count)
+    # plotting threshold vs mce
+    
+    plt.plot(thresh,mce, color='red', label='MCE curve w.r.t threshold')
+    plt.xlabel('Threshold')
+    plt.ylabel('MCE')
+    plt.xlim(-0.5,1.5)
+    plt.title('Threshold vs MCE')
+    plt.figtext(0.5, 0.01, "In the above graph, the misclassification error of different threshold is plotted", ha="center", fontsize=10, bbox={"facecolor":"brown", "alpha":0.5, "pad":5})
+    plt.legend()
+    plt.show()
+
 # Function to calculate the value of y for a given x using the regression line equation
 def calculate_value(x_new):
     return slope * x_new + intercept
@@ -52,6 +85,9 @@ Indicator = indicator(Y)
 
 # Fit linear regression model
 slope, intercept = fit_linear_regression(X, Indicator)
+
+# call the function
+threshVsMce(X,slope,intercept)
 
 # Calculate value of y for a new data point
 x_new = 8
