@@ -58,4 +58,4 @@ A graph that represent the Mean Squared Error of Training data and testing data 
 
 # Buddi7.py
 
-A graph that represent the the decision boundary is perpendicular to the regression line which classify 2 classes
+Two graphs in which one represent the misclassification with respect to various threshold and another represent the decision boundary is perpendicular to the regression line which classify 2 classes
