@@ -59,3 +59,7 @@ A graph that represent the Mean Squared Error of Training data and testing data 
 # Buddi7.py
 
 Two graphs in which one represent the misclassification with respect to various threshold and another represent the decision boundary is perpendicular to the regression line which classify 2 classes
+
+# Buddi7(2).py
+
+This is the extension of buddi7.py assignment in which sigmoidal function also implemented.
